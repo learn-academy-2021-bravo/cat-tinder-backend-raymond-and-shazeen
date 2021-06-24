@@ -1,19 +1,14 @@
 cats = [
   {
-    name: 'Felix',
-    age: 2,
-    enjoys: 'Long naps on the couch, and a warm fire.'
+    name: 'Cat',
+    age: 4,
+    enjoys: 'eating.'
   },
   {
-    name: 'Homer',
-    age: 12,
-    enjoys: 'Food mostly, really just food.'
+    name: 'Parsely',
+    age: 10,
+    enjoys: 'Eating a lot.'
   },
-  {
-    name: 'Jack',
-    age: 5,
-    enjoys: 'Furrrrociously hunting bugs.'
-  }
 ]
 
 cats.each do |attributes|
