@@ -56,10 +56,10 @@ RSpec.describe "Cats", type: :request do
 
         cat = Cat.first
         patch "/cats/#{cat.id}", params: new_cat_params
-
+        cat = Cat.first
         expect(response).to have_http_status(200)
-        expect(cat.name).to eq 'Cat'
-        expect(cat.age).to eq 3
+        expect(cat.name).to eq 'Parsely'
+        expect(cat.age).to eq 4
         
       end
     end
