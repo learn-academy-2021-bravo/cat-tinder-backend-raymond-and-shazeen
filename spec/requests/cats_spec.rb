@@ -35,33 +35,51 @@ RSpec.describe "Cats", type: :request do
     end
 
     describe "PATCH /update" do
-    it 'updates a cat' do
+      it 'updates a cat' do
 
-      cat_params = {
-        cat: {
-          name: 'Cat',
-          age: 3,
-          enjoys: 'eating'
+        cat_params = {
+          cat: {
+            name: 'Cat',
+            age: 3,
+            enjoys: 'eating'
+          }
         }
-      }
-      post '/cats', params: cat_params
+        post '/cats', params: cat_params
 
-      new_cat_params = {
-        cat: {
-          name: 'Parsely',
-          age: 4,
-          enjoys: 'eating'
+        new_cat_params = {
+          cat: {
+            name: 'Parsely',
+            age: 4,
+            enjoys: 'eating'
+          }
         }
-      }
 
-      cat = Cat.first
-      patch "/cats/#{cat.id}", params: new_cat_params
+        cat = Cat.first
+        patch "/cats/#{cat.id}", params: new_cat_params
 
-      expect(response).to have_http_status(200)
-      expect(cat.name).to eq 'Cat'
-      expect(cat.age).to eq 3
-      
+        expect(response).to have_http_status(200)
+        expect(cat.name).to eq 'Cat'
+        expect(cat.age).to eq 3
+        
+      end
     end
-  end
+
+    describe "DELETE /destroy" do
+      it 'deletes a cat' do
+        cat_params = {
+          cat: {
+            name: 'Felix',
+            age: 4,
+            enjoys: 'Walks in the park.'
+          }
+        }
+        post '/cats', params: cat_params
+        cat = Cat.first
+        delete "/cats/#{cat.id}"
+        expect(response).to have_http_status(200)
+        cats = Cat.all
+        expect(cats).to be_empty
+      end
+    end
   end
 end
