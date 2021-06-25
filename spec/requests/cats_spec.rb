@@ -81,5 +81,67 @@ RSpec.describe "Cats", type: :request do
         expect(cats).to be_empty
       end
     end
+
+    describe "Check meaningful validiation" do 
+      it "doesn't create a cat without a name" do
+        cat_params = {
+          cat:{
+            age:2,
+            enjoys:"walks in the park"
+          }
+        }
+
+        post "/cats", params: cat_params
+
+        expect(response.status).to eq 422
+
+        json = JSON.parse(response.body)
+
+        expect(json['name']).to include "can't be blank"
+
+      end
+    end
+
+    describe "Check meaningful validiation" do 
+      it "doesn't create a cat without a age" do
+        cat_params = {
+          cat:{
+            name:"Cat",
+            enjoys:"walks in the park"
+          }
+        }
+
+        post "/cats", params: cat_params
+
+        expect(response.status).to eq 422
+
+        json = JSON.parse(response.body)
+
+        expect(json['age']).to include "can't be blank"
+
+      end
+    end
+
+    describe "Check meaningful validiation" do 
+      it "doesn't create a cat without enjoys" do
+        cat_params = {
+          cat:{
+            name:"Cat",
+            age: 3
+            
+          }
+        }
+
+        post "/cats", params: cat_params
+
+        expect(response.status).to eq 422
+
+        json = JSON.parse(response.body)
+
+        expect(json['enjoys']).to include "can't be blank"
+
+      end
+    end
+
   end
 end
